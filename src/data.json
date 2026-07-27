@@ -1,0 +1,109 @@
+{
+    "name": "S_selva_ganesh",
+    "bio": {
+        "title": "Bio",
+        "description": "I am currently pursuing a B.Tech in Computer Science and Engineering with a specialization in Artificial Intelligence and Machine Learning. I am passionate about technology and programming and enjoy continuously learning new concepts and improving my problem-solving skills. I am also interested in activities like chess and dance, which help me stay creative and think strategically."
+    },
+    "home": {
+        "greeting": "Hi! I am S selva ganesh",
+        "image": "/images/personalphoto.webp"
+    },
+    "blogs": [
+        {
+            "name": "Disappear to Evolve",
+            "link": "https://smylifeinearth.blogspot.com/2025/10/disappear-to-evolve-power-of-going.html"
+        },
+        {
+            "name": "Grades Are Just Numbers",
+            "link": "https://smylifeinearth.blogspot.com/2025/05/grades-are-just-numbers.html"
+        },
+        {
+            "name": "The Beginning to Success",
+            "link": "https://smylifeinearth.blogspot.com/2022/01/the-beginning-to-success.html"
+        },
+        {
+            "name": "Building a React App from Scratch Using Webpack and Babel",
+            "link": "https://dev.to/selva_2026/building-a-react-app-from-scratch-using-webpack-and-babel-4a1n"
+        }
+    ],
+    "websites": [
+        { 
+            "name" : "FundBridge",
+            "link" : "https://fundbridge-frontend.vercel.app/"
+        },
+        {
+            "name": "Portfolio",
+            "link": "https://portfolio-mu-dusky-voqps6b9ep.vercel.app/"
+        },
+        {
+            "name": "Number Converter",
+            "link": "https://number-converter-app.vercel.app/"
+        },
+        {
+            "name": "Easy Json",
+            "link": "https://easy-json-xi.vercel.app/"
+        },
+        {
+            "name": "Movies Search",
+            "link": "https://movies-search-lovat.vercel.app/"
+        },
+        {
+            "name": "Real Time Chat App",
+            "link": "https://free-chat-room-ihga.onrender.com/"
+        },
+        {
+            "name": "Authentication in Flask",
+            "link": "https://authentication-in-flask.onrender.com/"
+        }
+    ],
+    "codingPlatforms": {
+        "title": "Codolio",
+        "link": "https://codolio.com/profile/ganesh2006"
+    },
+    "contact": {
+        "title": "Contact Me",
+        "subtitle": "Let’s build something meaningful together.",
+        "email": "https://mail.google.com/mail/?view=cm&fs=1&to=server07052006@gmail.com&su=Let's%20Connect&body=Hi%20Selva",
+        "github": "https://github.com/selva2006-GM",
+        "linkedin": "https://www.linkedin.com/in/sselvaganesh2006",
+        "backend": "http://127.0.0.1:5000/email"
+    },
+    "works": [
+        {
+            "title": "coding platforms",
+            "link": "/coding-platforms"
+        },
+        {
+            "title": "web Projects",
+            "link": "/websites"
+        },
+        {
+            "title": "hardware project",
+            "link": "https://example.com"
+        },
+        {
+            "title": "blog",
+            "link": "/blog"
+        }
+    ],
+    "skills": {
+        "programming": [
+            "Python",
+            "Java",
+            "C",
+            "C++",
+            "JavaScript"
+        ],
+        "web": [
+            "HTML5",
+            "CSS3",
+            "React"
+        ],
+        "dbms": [
+            "MySQL",
+            "PostgreSQL",
+            "MongoDB",
+            "Redis"
+        ]
+    }
+}
