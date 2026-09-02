@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaEnvelope, FaGithub, FaLinkedin, FaPaperclip } from "react-icons/fa";
-import data from "../Data.json";
+import data from "../data.json";
 
 export default function Contact() {
     const [loading, setLoading] = useState(false);
