@@ -114,7 +114,7 @@ export default function Contact() {
     }
 
     return (
-        <section className="max-w-5xl mx-auto px-6 py-20 text-center">
+        <section id="contact" className="max-w-5xl mx-auto px-6 py-20 text-center">
 
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                 {contact.title}
