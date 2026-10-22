@@ -27,9 +27,9 @@
         }
     ],
     "websites": [
-        { 
-            "name" : "FundBridge",
-            "link" : "https://fundbridge-frontend.vercel.app/"
+        {
+            "name": "FundBridge",
+            "link": "https://fundbridge-frontend.vercel.app/"
         },
         {
             "name": "Portfolio",
@@ -54,6 +54,70 @@
         {
             "name": "Authentication in Flask",
             "link": "https://authentication-in-flask.onrender.com/"
+        },
+        {
+            "name": "To-Do List",
+            "link": "https://to-do-list-with-more-features-front.vercel.app/"
+        },
+        {
+            "name": "Portfolio 3",
+            "link": "https://portfolio-3-rosy-beta.vercel.app/"
+        },
+        {
+            "name": "Personal Portfolio",
+            "link": "https://selvacodes.online/"
+        },
+        {
+            "name": "Anu 20th Birthday",
+            "link": "https://anu20th-birthday.vercel.app/"
+        },
+        {
+            "name": "Easy JSON 2",
+            "link": "https://easy-json-9d74.vercel.app/"
+        },
+        {
+            "name": "React Component Communication",
+            "link": "https://react-component-communication.vercel.app/"
+        },
+        {
+            "name": "OMR Maker",
+            "link": "https://omr-maker-teal.vercel.app/"
+        },
+        {
+            "name": "Portfolio Website 2",
+            "link": "https://protfolio-website-2vc6.vercel.app/"
+        },
+        {
+            "name": "My Love",
+            "link": "https://my-love-puce-theta.vercel.app/"
+        },
+        {
+            "name": "Portfolio Website 3",
+            "link": "https://protfolio-website-pi-rose.vercel.app/"
+        },
+        {
+            "name": "Easy Shopping",
+            "link": "https://easy-shopping-psi.vercel.app/"
+        },
+        {
+            "name": "Portfolio Website 4",
+            "link": "https://protfolio-website-6rfw.vercel.app/"
+        },
+        {
+            "name": "Progress Tracker",
+            "link": "https://progress-virid-gamma.vercel.app/"
+        },
+        {
+            "name": "Test Deployment",
+            "link": "https://testdep-swart.vercel.app/"
+        },
+        {
+            "name": "My Site",
+            "link": "https://my-site-lemon-rho.vercel.app/"
+        },
+        {
+            "name": "Weather App",
+            "link": "https://weather-app-chi-six-52.vercel.app/"
         }
     ],
     "codingPlatforms": {

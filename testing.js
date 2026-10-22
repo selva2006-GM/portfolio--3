@@ -1,27 +1,55 @@
-import dotenv from "dotenv";
-import { Resend } from "resend";
 
-dotenv.config();
+const TOKEN = process.env.VERCEL_TOKEN;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+async function main() {
+  if (!TOKEN) {
+    throw new Error("VERCEL_TOKEN is not set");
+  }
 
-const { data, error } = await resend.batch.send([
-  {
-    from: "Acme <onboarding@resend.dev>",
-    to: ["delivered@resend.dev"],
-    subject: "Welcome to Acme",
-    html: "<p>Thanks for signing up!</p>",
-  },
-  {
-    from: "Acme <onboarding@resend.dev>",
-    to: ["delivered@resend.dev"],
-    subject: "Order Confirmation",
-    html: "<p>Your order has been confirmed.</p>",
-  },
-]);
+  const headers = {
+    Authorization: `Bearer ${TOKEN}`,
+  };
 
-if (error) {
-  console.error("Resend error:", error);
-} else {
-  console.log("Success:", data);
+  const projectsResponse = await fetch(
+    "https://api.vercel.com/v9/projects?limit=100",
+    { headers }
+  );
+
+  if (!projectsResponse.ok) {
+    throw new Error(`Projects API: ${projectsResponse.status}`);
+  }
+
+  const projectsData = await projectsResponse.json();
+
+  for (const project of projectsData.projects ?? []) {
+    const url = new URL(
+      `https://api.vercel.com/v9/projects/${encodeURIComponent(project.id)}/domains`
+    );
+    url.searchParams.set("limit", "100");
+
+    const response = await fetch(url, { headers });
+
+    if (!response.ok) {
+      console.log(`\n${project.name}: API error ${response.status}`);
+      continue;
+    }
+
+    const data = await response.json();
+    console.log(`\n${project.name}`);
+
+    if (!data.domains?.length) {
+      console.log("  No assigned domains found");
+      continue;
+    }
+
+    for (const domain of data.domains) {
+      console.log(
+        `  https://${domain.name} | ${
+          domain.verified ? "Verified" : "Not verified"
+        }`
+      );
+    }
+  }
 }
+
+main().catch(console.error);
