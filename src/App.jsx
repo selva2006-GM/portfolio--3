@@ -1,21 +1,14 @@
+import { useState } from "react";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Education from "./components/Education";
-import Contact from "./components/Contact";
 
 function App() {
+  const [page, setPage] = useState("home");
+
   return (
     <>
-      <Nav />
-      <Home />
-      <About />
-      <Skills />
-       <Projects />
-      <Education />
-      <Contact />
+      <Nav page={page} setPage={setPage} />
+      <Home page={page} setPage={setPage} />
     </>
   );
 }

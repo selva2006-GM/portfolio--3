@@ -1,55 +1,26 @@
 
-const TOKEN = process.env.VERCEL_TOKEN;
+import "dotenv/config";
+import { mkdir, writeFile } from "node:fs/promises";
+import path from "node:path";
 
-async function main() {
-  if (!TOKEN) {
-    throw new Error("VERCEL_TOKEN is not set");
-  }
+async function fetchAllRepos() {
+  const repos = [];
 
-  const headers = {
-    Authorization: `Bearer ${TOKEN}`,
-  };
-
-  const projectsResponse = await fetch(
-    "https://api.vercel.com/v9/projects?limit=100",
-    { headers }
-  );
-
-  if (!projectsResponse.ok) {
-    throw new Error(`Projects API: ${projectsResponse.status}`);
-  }
-
-  const projectsData = await projectsResponse.json();
-
-  for (const project of projectsData.projects ?? []) {
-    const url = new URL(
-      `https://api.vercel.com/v9/projects/${encodeURIComponent(project.id)}/domains`
+  for (let page = 1; ; page++) {
+    const response = await fetch(
+      `${URL}/api/projects`
+      
     );
-    url.searchParams.set("limit", "100");
-
-    const response = await fetch(url, { headers });
 
     if (!response.ok) {
-      console.log(`\n${project.name}: API error ${response.status}`);
-      continue;
+      const error = await response.json();
+      throw new Error(`GitHub API error ${response.status}: ${error.message}`);
     }
 
     const data = await response.json();
-    console.log(`\n${project.name}`);
-
-    if (!data.domains?.length) {
-      console.log("  No assigned domains found");
-      continue;
-    }
-
-    for (const domain of data.domains) {
-      console.log(
-        `  https://${domain.name} | ${
-          domain.verified ? "Verified" : "Not verified"
-        }`
-      );
-    }
+    console.log(data);
+    
   }
-}
 
-main().catch(console.error);
+}
+fetchAllRepos()
