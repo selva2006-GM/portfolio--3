@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 
 
 
+
 export default function Projects({ setPage, preview = false }) {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,8 +15,17 @@ export default function Projects({ setPage, preview = false }) {
 
   // Fetch projects from the API
   const GITHUB_TOKEN = import.meta.env.GITHUBACCESS;
+  const token = import.meta.env.GITHUBACCESS;
 
-useEffect(() => {
+console.log({
+  exists: Boolean(token),
+  length: token?.length,
+  prefix: token?.slice(0, 4),
+});
+
+  
+  useEffect(() => {
+    console.log(GITHUB_TOKEN);
   const controller = new AbortController();
 
   async function fetchProjects() {
@@ -154,7 +164,7 @@ useEffect(() => {
 
         {/* Heading */}
         <div className="mb-10 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-gray-500">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-gray-500">
             My Work
           </p>
 
