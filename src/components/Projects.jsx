@@ -22,17 +22,24 @@ export default function Projects({ setPage, preview = false }) {
         setError("");
   
         const response = await fetch(
-          "https://api.github.com/users/selva2006-GM/repos?per_page=100&sort=updated",
-          { signal: controller.signal }
+          "https://api.github.com/user/repos?per_page=100&affiliation=owner&sort=updated",
+          {
+            signal: controller.signal,
+            headers: {
+              Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+              Accept: "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+            },
+          }
         );
   
         if (!response.ok) {
-          throw new Error("Failed to fetch GitHub repositories");
+          throw new Error("GitHub API request failed");
         }
   
         const data = await response.json();
   
-        const formattedProjects = data.map((repo) => ({
+        setProjects(data.map(repo => ({
           id: repo.id,
           name: repo.name,
           description: repo.description,
@@ -41,9 +48,7 @@ export default function Projects({ setPage, preview = false }) {
           stars: repo.stargazers_count,
           private: repo.private,
           updated_at: repo.updated_at,
-        }));
-  
-        setProjects(formattedProjects);
+        })));
   
       } catch (err) {
         if (err.name !== "AbortError") {
