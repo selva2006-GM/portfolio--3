@@ -13,59 +13,60 @@ export default function Projects({ setPage, preview = false }) {
   const [sort, setSort] = useState("updated");
 
   // Fetch projects from the API
-  useEffect(() => {
-    const controller = new AbortController();
-  
-    async function fetchProjects() {
-      try {
-        setLoading(true);
-        setError("");
-  
-        const response = await fetch(
-          "https://api.github.com/user/repos?per_page=100&affiliation=owner&sort=updated",
-          {
-            signal: controller.signal,
-            headers: {
-              Authorization: `Bearer ${import.meta.env.GITHUBACCESS}`,
-              Accept: "application/vnd.github+json",
-              "X-GitHub-Api-Version": "2022-11-28",
-            },
-          }
-        );
-  
-        const data = await response.json();
-  
-        if (!response.ok) {
-          throw new Error(data.message || "GitHub API request failed");
+  const GITHUB_TOKEN = import.meta.env.VITE_GITHUBACCESS;
+
+useEffect(() => {
+  const controller = new AbortController();
+
+  async function fetchProjects() {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch(
+        "https://api.github.com/user/repos?per_page=100&affiliation=owner&sort=updated",
+        {
+          signal: controller.signal,
+          headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+          },
         }
-  
-        setProjects(data.map(repo => ({
-          id: repo.id,
-          name: repo.name,
-          description: repo.description,
-          url: repo.html_url,
-          language: repo.language,
-          stars: repo.stargazers_count,
-          private: repo.private,
-          updated_at: repo.updated_at,
-        })));
-  
-      } catch (err) {
-        if (err.name !== "AbortError") {
-          setError(err.message);
-        }
-      } finally {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "GitHub API failed");
+      }
+
+      setProjects(data.map(repo => ({
+        id: repo.id,
+        name: repo.name,
+        description: repo.description,
+        url: repo.html_url,
+        language: repo.language,
+        stars: repo.stargazers_count,
+        private: repo.private,
+        updated_at: repo.updated_at,
+      })));
+
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        setError(err.message);
+      }
+    } finally {
+      if (!controller.signal.aborted) {
+        setLoading(false);
       }
     }
-  
-    fetchProjects();
-  
-    return () => controller.abort();
-  }, []);
+  }
 
+  fetchProjects();
+
+  return () => controller.abort();
+}, []);
   // Get available programming languages
   const languages = useMemo(() => {
     const availableLanguages = projects
