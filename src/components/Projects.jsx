@@ -13,7 +13,7 @@ export default function Projects({ setPage, preview = false }) {
   const [sort, setSort] = useState("updated");
 
   // Fetch projects from the API
-  const GITHUB_TOKEN = import.meta.env.VITE_GITHUBACCESS;
+  const GITHUB_TOKEN = import.meta.env.GITHUBACCESS;
 
 useEffect(() => {
   const controller = new AbortController();
