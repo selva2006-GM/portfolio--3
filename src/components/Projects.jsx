@@ -15,40 +15,39 @@ export default function Projects({ setPage, preview = false }) {
   // Fetch projects from the API
   useEffect(() => {
     const controller = new AbortController();
-
+  
     async function fetchProjects() {
       try {
         setLoading(true);
         setError("");
-
-        if (!API_URL) {
-          throw new Error("VITE_API_URL is not configured");
-        }
-
+  
         const response = await fetch(
-          `${API_URL.replace(/\/+$/, "")}/api/projects`,
+          "https://api.github.com/users/selva2006-GM/repos?per_page=100&sort=updated",
           { signal: controller.signal }
         );
-
+  
         if (!response.ok) {
-          throw new Error(`API error: ${response.status}`);
+          throw new Error("Failed to fetch GitHub repositories");
         }
-
+  
         const data = await response.json();
-
-        // Support both { projects: [...] } and [...] responses
-        const projectList = Array.isArray(data)
-          ? data
-          : data.projects;
-
-        if (!Array.isArray(projectList)) {
-          throw new Error("Invalid projects response from API");
-        }
-
-        setProjects(projectList);
+  
+        const formattedProjects = data.map((repo) => ({
+          id: repo.id,
+          name: repo.name,
+          description: repo.description,
+          url: repo.html_url,
+          language: repo.language,
+          stars: repo.stargazers_count,
+          private: repo.private,
+          updated_at: repo.updated_at,
+        }));
+  
+        setProjects(formattedProjects);
+  
       } catch (err) {
         if (err.name !== "AbortError") {
-          setError(err.message || "Failed to load projects");
+          setError(err.message);
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -56,9 +55,9 @@ export default function Projects({ setPage, preview = false }) {
         }
       }
     }
-
+  
     fetchProjects();
-
+  
     return () => controller.abort();
   }, []);
 
