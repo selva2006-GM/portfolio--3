@@ -1,7 +1,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL;
+
 
 export default function Projects({ setPage, preview = false }) {
   const [projects, setProjects] = useState([]);
@@ -26,12 +26,11 @@ useEffect(() => {
       const response = await fetch(
         "https://api.github.com/user/repos?per_page=100&affiliation=owner&sort=updated",
         {
-          signal: controller.signal,
-          headers: {
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-            Accept: "application/vnd.github+json",
-            "X-GitHub-Api-Version": "2022-11-28",
-          },
+            headers: {
+                Authorization: `Bearer ${GITHUB_TOKEN}`,
+                Accept: "application/vnd.github+json",
+                "X-GitHub-Api-Version": "2022-11-28",
+              },
         }
       );
 
